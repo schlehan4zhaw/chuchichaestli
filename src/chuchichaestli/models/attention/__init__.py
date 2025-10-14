@@ -3,9 +3,9 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 """Attention mechanism implementations."""
 
-from chuchichaestli.models.attention.self_attention import SelfAttention
-from chuchichaestli.models.attention.conv_attention import ConvAttention
-from chuchichaestli.models.attention.attention_gate import AttentionGate
+from chuchichaestli.src.chuchichaestli.models.attention.self_attention import SelfAttention
+from chuchichaestli.src.chuchichaestli.models.attention.conv_attention import ConvAttention
+from chuchichaestli.src.chuchichaestli.models.attention.attention_gate import AttentionGate
 
 ATTENTION_MAP = {
     "self_attention": SelfAttention,

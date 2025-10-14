@@ -6,12 +6,12 @@
 from math import gcd
 import torch
 from torch import nn
-from chuchichaestli.models.norm import Norm
-from chuchichaestli.models.resnet import ResidualBlock as ResnetBlock
-from chuchichaestli.models.activations import ACTIVATION_FUNCTIONS
-from chuchichaestli.models.attention import ATTENTION_MAP
-from chuchichaestli.models.maps import DIM_TO_CONV_MAP
-from chuchichaestli.utils import partialclass
+from chuchichaestli.src.chuchichaestli.models.norm import Norm
+from chuchichaestli.src.chuchichaestli.models.resnet import ResidualBlock as ResnetBlock
+from chuchichaestli.src.chuchichaestli.models.activations import ACTIVATION_FUNCTIONS
+from chuchichaestli.src.chuchichaestli.models.attention import ATTENTION_MAP
+from chuchichaestli.src.models.maps import DIM_TO_CONV_MAP
+from chuchichaestli.src.chuchichaestli.utils import partialclass
 from collections.abc import Callable
 
 

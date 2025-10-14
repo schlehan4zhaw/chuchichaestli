@@ -6,9 +6,9 @@
 import torch
 from torch import nn
 
-from chuchichaestli.models.activations import ACTIVATION_FUNCTIONS
-from chuchichaestli.models.maps import DIM_TO_CONV_MAP
-from chuchichaestli.models.norm import Norm
+from chuchichaestli.src.chuchichaestli.models.activations import ACTIVATION_FUNCTIONS
+from chuchichaestli.src.chuchichaestli.models.maps import DIM_TO_CONV_MAP
+from chuchichaestli.src.chuchichaestli.models.norm import Norm
 
 
 class ResidualBlock(nn.Module):
