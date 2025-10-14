@@ -6,7 +6,7 @@
 import torch
 from torch import nn
 from torch.nn import functional as F
-from chuchichaestli.models.maps import DIM_TO_CONV_MAP, UPSAMPLE_MODE
+from  chuchichaestli.src.chuchichaestli.models.maps import DIM_TO_CONV_MAP, UPSAMPLE_MODE
 
 
 class AttentionGate(nn.Module):
