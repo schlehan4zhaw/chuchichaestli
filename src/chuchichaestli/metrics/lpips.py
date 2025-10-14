@@ -462,7 +462,7 @@ class LPIPSLoss(Module):
         self.model.requires_grad_(False)
         if isinstance(embedding, bool) or embedding is None:
             embedding = (
-                LPIPSEmbedding(self.model.feature_channels, InitMethod(weight_distribution))
+                LPIPSEmbedding(self.model.feature_channels, init_method=InitMethod(weight_distribution))
                 if embedding
                 else LPIPSNonEmbedding(self.model.feature_channels)
             )
