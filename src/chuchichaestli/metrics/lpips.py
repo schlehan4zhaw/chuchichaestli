@@ -25,6 +25,7 @@ from chuchichaestli.models.adversarial.blocks import BaseConvBlock
 from chuchichaestli.utils import partialclass
 from typing import Any, Literal
 from collections.abc import Iterable, Sequence, Callable
+from chuchichaestli.utils import initialize_weights, InitMethod
 
 
 __all__ = [
@@ -292,6 +293,7 @@ class LPIPSEmbedding(ModuleList):
         softplus: bool = False,
         dropout: bool = False,
         clamp_weights: bool = False,
+        init_method: InitMethod = InitMethod.XAVIER,
     ):
         """Constructor.
 
@@ -302,6 +304,7 @@ class LPIPSEmbedding(ModuleList):
             dropout: If `True`, uses dropout in the embedding.
             clamp_weights: If `True`, the weights of the embedding layers are clamped;
               this is necessary to avoid negative values
+            init_method: weight initialisation for LPIPSEmbedding
         """
         if not isinstance(out_channels, Iterable):
             out_channels = [out_channels] * len(in_channels)
@@ -310,6 +313,7 @@ class LPIPSEmbedding(ModuleList):
             layer = LPIPSEmbeddingBlock(2, in_c, out_c, act=softplus, dropout=dropout)
             layers.append(layer)
         super().__init__(layers)
+        self.apply(lambda m: initialize_weights(m, method=init_method))
         if clamp_weights:
             self.clamp_weights()
 
@@ -411,6 +415,7 @@ class LPIPSLoss(Module):
         reduction: Callable | None = torch.mean,
         device: torch.device | None = None,
         spatial_average: bool = True,
+        weight_distribution: str = "xavier", 
     ):
         """Constructor.
 
@@ -458,7 +463,7 @@ class LPIPSLoss(Module):
         self.model.requires_grad_(False)
         if isinstance(embedding, bool) or embedding is None:
             embedding = (
-                LPIPSEmbedding(self.model.feature_channels)
+                LPIPSEmbedding(self.model.feature_channels, InitMethod(weight_distribution))
                 if embedding
                 else LPIPSNonEmbedding(self.model.feature_channels)
             )
