@@ -609,6 +609,10 @@ class LPIPSLoss(Module):
         """Spatially average image dimensions of tensors."""
         return [xi.mean((2, 3), keepdim=keepdim) for xi in x]
 
+    def save_model(self, path):
+        self.embedding.save(path)
+        print(f"embedding saved at {path}")
+    
     def forward(
         self, x1: torch.Tensor, x2: torch.Tensor, as_scores: bool = False, **kwargs
     ) -> torch.Tensor | Sequence[torch.Tensor]:
@@ -635,5 +639,5 @@ class LPIPSLoss(Module):
         )
         if as_scores:
             return [reduction(s.squeeze()) for s in scores]
-        loss = sum(scores).squeeze()
-        return reduction(loss)
+        loss = sum(scores)
+        return loss
