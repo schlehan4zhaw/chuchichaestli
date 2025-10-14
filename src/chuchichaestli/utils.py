@@ -26,6 +26,9 @@ class InitMethod(Enum):
     ORTHOGONAL = "orthogonal"
     NORMAL = "normal"
     UNIFORM = "uniform"
+    ONES = "ones"
+    ZEROS = "zeros"
+    
 
 
 def initialize_weights(module, method: InitMethod, gain=0.02):
@@ -48,6 +51,10 @@ def initialize_weights(module, method: InitMethod, gain=0.02):
             init.normal_(module.weight.data, mean=0.0, std=gain)
         elif method == InitMethod.UNIFORM:
             init.uniform_(module.weight.data, -gain, gain)
+        elif method == InitMethod.ONES:
+            init.constant_(module.weight.data, 1.0)
+        elif method == InitMethod.ZEROS:
+            init.constant_(module.weight.data, 0.0)
 
         if module.bias is not None:
             init.constant_(module.bias.data, 0.0)
