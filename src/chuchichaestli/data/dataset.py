@@ -15,7 +15,7 @@ from h5py import (
 )
 import torch
 from torch.utils.data import Dataset
-from chuchichaestli.data.cache import (
+from chuchichaestli.src.chuchichaestli.data.cache import (
     nbytes,
     npy_to_torch_dtype,
     serial_byte_size,
